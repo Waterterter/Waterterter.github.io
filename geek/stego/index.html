@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="��һƪ���ͣ���������FLAG��orz�����Ժ��ܹ����д��ȥ��19�Ŵ���2019�۷弫�͵ı�����Ȼ�����Ƿǳ��ˣ�web���ֶ��������������²�̫�Ѻõ��¹��Ͽ�ʼ�о�����misc��������һ����д��Ŀ������������ͽ�����̡�Let’s start it�� 0x1.base64 ����&#x2F;�����">
+<meta name="description" content="第一篇博客，先来立个FLAG（orz）：以后能够坚持写下去！19号打了2019巅峰极客的比赛，然而还是非常菜，web部分对于我这样的萌新不太友好导致果断开始研究起了misc。下面是一道隐写题目中遇到的问题和解决过程。Lets start it。">
 <meta name="keywords" content="web&amp;android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1">
-<meta property="og:url" content="https:&#x2F;&#x2F;cuagain.xyz&#x2F;2019&#x2F;10&#x2F;23&#x2F;1&#x2F;index.html">
+<meta property="og:title" content="Base64隐写原理和2019巅峰极客隐写题steganography的复现">
+<meta property="og:url" content="https:&#x2F;&#x2F;cuagain.xyz&#x2F;geek&#x2F;stego&#x2F;index.html">
 <meta property="og:site_name" content="W4t3rs&#39; Blog">
-<meta property="og:description" content="��һƪ���ͣ���������FLAG��orz�����Ժ��ܹ����д��ȥ��19�Ŵ���2019�۷弫�͵ı�����Ȼ�����Ƿǳ��ˣ�web���ֶ��������������²�̫�Ѻõ��¹��Ͽ�ʼ�о�����misc��������һ����д��Ŀ������������ͽ�����̡�Let’s start it�� 0x1.base64 ����&#x2F;�����">
+<meta property="og:description" content="第一篇博客，先来立个FLAG（orz）：以后能够坚持写下去！19号打了2019巅峰极客的比赛，然而还是非常菜，web部分对于我这样的萌新不太友好导致果断开始研究起了misc。下面是一道隐写题目中遇到的问题和解决过程。Lets start it。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog1_1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog1_2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog1_3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog1_4.png">
-<meta property="og:updated_time" content="2019-10-23T07:52:31.817Z">
+<meta property="og:updated_time" content="2019-10-23T09:22:50.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog1_1.png">
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://cuagain.xyz/2019/10/23/1/"/>
+  <link rel="canonical" href="https://cuagain.xyz/geek/stego/"/>
 
 
 
 
 
-  <title>1 | W4t3rs' Blog</title>
+  <title>Base64隐写原理和2019巅峰极客隐写题steganography的复现 | W4t3rs' Blog</title>
   
 
 
@@ -256,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cuagain.xyz/2019/10/23/1/">
+    <link itemprop="mainEntityOfPage" href="https://cuagain.xyz/geek/stego/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="水水水...">
@@ -273,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1</h1>
+          <h1 class="post-title" itemprop="name headline">Base64隐写原理和2019巅峰极客隐写题steganography的复现</h1>
         
 
         <div class="post-meta">
@@ -323,15 +323,16 @@
       
 
       
-        <p>��һƪ���ͣ���������FLAG��orz�����Ժ��ܹ����д��ȥ��19�Ŵ���2019�۷弫�͵ı�����Ȼ�����Ƿǳ��ˣ�web���ֶ��������������²�̫�Ѻõ��¹��Ͽ�ʼ�о�����misc��������һ����д��Ŀ������������ͽ�����̡�Let’s start it��</p>
-<h3 id="0x1-base64-����-����"><a href="#0x1-base64-����-����" class="headerlink" title="0x1.base64 ����/����"></a>0x1.base64 ����/����</h3><p>���ȼ�ѧϰ��һ�¹���base64�ı���ԭ��:<br>Step1, ����������ַ���Ӧ��asciiת��Ϊ��λ�Ķ����ƣ�<br>Step2, base64�Ļ�����λ��3���ֽڣ�������64���ɴ�ӡ�ַ���˵��6��bit���㹻��ʾ�ˣ������ڱ���ʱ����6��bitһ�����base64����������б��롣ȫ��0��6��bit�õȺ�����䡣SoΪ�˱��������������±ߵ�ͼ����ʾ��<br><img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_1.png" alt="����ʾ��"><br>���ڽ���ʱ���涨����ɾ��n*8��bit��nΪ�Ⱥ���������ɾ���Ժ���8��bitһ�����ascii�������н��뼴�ɡ�</p>
-<h3 id="0x2-base64��д"><a href="#0x2-base64��д" class="headerlink" title="0x2.base64��д"></a>0x2.base64��д</h3><p>ͨ��ԭ�����Է��֣���������ڽ���base64����ʱ����ͼ�мӴֵ�0��bit�����չ涨��0����䣬������Ŀ�ĵ���0��1����䣬�����ڽ���ʱ��Ӱ��ԭ�ĵĻ�ȡ��ͬʱ���ܹ�������Щbit������Ϣ���߻������롣<br>�ٸ����ӣ������ϱ��е��ı�BC������base64�����ΪQkM=��������ǽ��Ӵֵ�����bit����11����ô�����������base64�������QkP=����������õ��Ļ���BC��</p>
-<h3 id="0x3-MISC����steganography�ĸ���"><a href="#0x3-MISC����steganography�ĸ���" class="headerlink" title="0x3.MISC����steganography�ĸ���"></a>0x3.MISC����steganography�ĸ���</h3><p>��Ŀ������һ��.png��ͼƬ��ͨ��binwalk�������ṹ����ȡ���ز��֣������ܷ����ѹ����40FBE.zip���������һ��.pyc�ļ���������Ҫ��ѹ���룬ͨ�����˼·���Ǳ��ƻ��߸�����Ŀ�е�������������password������һ����ziperello������һ���ټ�������������⡣<img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_2.png" alt="ѹ���ļ�"><br>ͨ��binwalk���������ļ�β��һ��zip�ļ������Խ�leaf�ĺ�׺�ĳ�zip���ֺ�������һ��word�ļ�����word������base64��д�������ô��еĽű�����</p>
+        <p>第一篇博客，先来立个FLAG（orz）：以后能够坚持写下去！19号打了2019巅峰极客的比赛，然而还是非常菜，web部分对于我这样的萌新不太友好导致果断开始研究起了misc。下面是一道隐写题目中遇到的问题和解决过程。Lets start it。</p>
+<a id="more"></a>
+<h3 id="0x1-base64-编码-解码"><a href="#0x1-base64-编码-解码" class="headerlink" title="0x1.base64 编码/解码"></a>0x1.base64 编码/解码</h3><p>首先简单学习了一下关于base64的编码原理:<br>Step1, 将待编码的字符对应的ascii转换为八位的二进制；<br>Step2, base64的基本单位是3个字节，而对于64个可打印字符来说，6个bit就足够表示了，所以在编码时按照6个bit一组根据base64规则表来进行编码。全是0的6个bit用等号来填充。So为了便于理解我们用下边的图来表示：<br><img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_1.png" alt="编码示例"><br>而在解码时，规定首先删除n*8个bit（n为等号数量），删除以后按照8个bit一组根据ascii表来进行解码即可。</p>
+<h3 id="0x2-base64隐写"><a href="#0x2-base64隐写" class="headerlink" title="0x2.base64隐写"></a>0x2.base64隐写</h3><p>通过原理可以发现，如果我们在进行base64编码时，对图中加粗的0的bit不按照规定用0来填充，而是有目的的用0或1来填充，这样在解码时不影响原文的获取，同时还能够利用这些bit隐藏信息或者混淆编码。<br>举个例子，对于上表中的文本BC，经过base64编码后为QkM=，如果我们将加粗的两个bit换成11，那么经过混淆后的base64编码就是QkP=，而它解码得到的还是BC。</p>
+<h3 id="0x3-MISC部分steganography的复现"><a href="#0x3-MISC部分steganography的复现" class="headerlink" title="0x3.MISC部分steganography的复现"></a>0x3.MISC部分steganography的复现</h3><p>题目附件是一张.png的图片，通过binwalk来分析结构与提取隐藏部分，我们能分离出压缩包40FBE.zip，里面包含一个.pyc文件，但是需要解压密码，通常解决思路就是爆破或者根据题目中的其他部分来找password，我们一边用ziperello跑密码一边再继续解决其他问题。<img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_2.png" alt="压缩文件"><br>通过binwalk分析看出文件尾是一个zip文件，所以将leaf的后缀改成zip发现很明显是一个word文件。打开word发现是base64隐写。这里用大佬的脚本来跑</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def deStego(stegoFile):</span><br><span class="line">    b64table = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span></span><br><span class="line">    with open(stegoFile, <span class="string">'r'</span>) as stegoText:</span><br><span class="line">        message = <span class="string">""</span></span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> stegoText:</span><br><span class="line">            try:</span><br><span class="line">                text = line[line.index(<span class="string">"="</span>) - 1:-1]</span><br><span class="line">                message += <span class="string">""</span>.join([bin(0 <span class="keyword">if</span> i == <span class="string">'='</span> <span class="keyword">else</span> b64table.find(i))[2:].zfill(6) <span class="keyword">for</span> i <span class="keyword">in</span> text])[</span><br><span class="line">                           6 - 2 * text.count(<span class="string">'='</span>):6]</span><br><span class="line">            except:</span><br><span class="line">                pass</span><br><span class="line">    <span class="built_in">return</span> <span class="string">""</span>.join([chr(int(message[i:i + 8], 2)) <span class="keyword">for</span> i <span class="keyword">in</span> range(0, len(message), 8)])</span><br><span class="line"><span class="built_in">print</span>(deStego(<span class="string">"e://stego.txt"</span>))</span><br></pre></td></tr></table></figure>
-<p>���Ϊ<img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_3.png" alt="���"><br>������ѹ���������룬���Գɹ����õ�leaf.pyc<br>�ٶȶ���pyc����д��ͨ��stegosaurus������ģ���������ֱ���ܽű����ɣ����˵õ���һ���flag: 57f3-8cb4-1add2793f508}��<br>����һ��flag���޸ĺ�׺���õ���zip�ļ��е�flag.xml���ļ���HEX����Ϊ<br><img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_4.png" alt="hex����"><br>�������ﵱʱ�����Ħ˹���룬�������ֲ��ԡ��������ǵ���ʾ�ǽ�20���ո񣩺�09��tab���ֱ����Ϊ0��1����8��bit������Ϳ��Եõ�ǰһ��Ľ����flag{2806105f-ec43-��<br>flag{2806105f-ec43-57f3-8cb4-1add2793f508}.  </p>
-<h3 id="0x4-������д����-amp-��ȡ����-Pһ��-��"><a href="#0x4-������д����-amp-��ȡ����-Pһ��-��" class="headerlink" title="0x4.������д����&amp;��ȡ����(Ƥһ��^_^��"></a>0x4.������д����&amp;��ȡ����(Ƥһ��^_^��</h3><p>bXkgbmFtZSBpcyB3NHQzcg==<br>aSBhbSAzIHllYXJzIG9sZA==<br>aSBob3BlIGN1YWdhaW4gaW4gdGhpcyBzaXRl<br>bGFzdCwgc3RlZ29fdG9vbHMgc2hvdWxkIGJlIGNvbGxlY3RlZCB5b3Vyc2VsZg==<br>TE9M</p>
-<h3 id="0x5-�ο�����"><a href="#0x5-�ο�����" class="headerlink" title="0x5.�ο�����"></a>0x5.�ο�����</h3><p><a href="https://www.tuicool.com/articles/RRr2miE" target="_blank" rel="noopener">https://www.tuicool.com/articles/RRr2miE</a><br><a href="https://mp.weixin.qq.com/s/KXjf3EQkwPKManY1JBdEgg" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/KXjf3EQkwPKManY1JBdEgg</a><br><a href="https://github.com/AngelKitty/stegosaurus" target="_blank" rel="noopener">https://github.com/AngelKitty/stegosaurus</a>  </p>
-<h2 id="END…"><a href="#END…" class="headerlink" title="END…"></a>END…</h2><p>Ŷ���ˣ�o(�i�n�i)oѹ�������뻹û������…</p>
+<p>结果为<img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_3.png" alt="结果"><br>可能是压缩包的密码，尝试成功，得到leaf.pyc<br>百度对于pyc的隐写是通过stegosaurus来解决的，所以我们直接跑脚本即可，至此得到了一半的flag: 57f3-8cb4-1add2793f508}。<br>而另一半flag在修改后缀名得到的zip文件中的flag.xml。文件的HEX编码为<br><img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog1_4.png" alt="hex编码"><br>遇到这里当时想的是摩斯密码，后来发现不对。经大佬们的提示是将20（空格）和09（tab）分别编码为0和1，按8个bit来编码就可以得到前一半的结果了flag{2806105f-ec43-。<br>flag{2806105f-ec43-57f3-8cb4-1add2793f508}.  </p>
+<h3 id="0x4-常用隐写分析-amp-提取工具-皮一下-）"><a href="#0x4-常用隐写分析-amp-提取工具-皮一下-）" class="headerlink" title="0x4.常用隐写分析&amp;提取工具(皮一下^_^）"></a>0x4.常用隐写分析&amp;提取工具(皮一下^_^）</h3><p>bXkgbmFtZSBpcyB3NHQzcg==<br>aSBhbSAzIHllYXJzIG9sZA==<br>aSBob3BlIGN1YWdhaW4gaW4gdGhpcyBzaXRl<br>bGFzdCwgc3RlZ29fdG9vbHMgc2hvdWxkIGJlIGNvbGxlY3RlZCB5b3Vyc2VsZg==<br>TE9M</p>
+<h3 id="0x5-参考链接"><a href="#0x5-参考链接" class="headerlink" title="0x5.参考链接"></a>0x5.参考链接</h3><p><a href="https://www.tuicool.com/articles/RRr2miE" target="_blank" rel="noopener">https://www.tuicool.com/articles/RRr2miE</a><br><a href="https://mp.weixin.qq.com/s/KXjf3EQkwPKManY1JBdEgg" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/KXjf3EQkwPKManY1JBdEgg</a><br><a href="https://github.com/AngelKitty/stegosaurus" target="_blank" rel="noopener">https://github.com/AngelKitty/stegosaurus</a>  </p>
+<h2 id="END…"><a href="#END…" class="headerlink" title="END…"></a>END…</h2><p>哦对了，o(╥﹏╥)o压缩包密码还没有跑完…</p>
 
       
     </div>
@@ -356,8 +357,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/17/Hexo/" rel="next" title="Hexo">
-                <i class="fa fa-chevron-left"></i> Hexo
+              <a href="/undefined/ck232o2k50002souc3wmo2rtd/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
@@ -445,7 +446,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -498,7 +499,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x1-base64-����-����"><span class="nav-number">1.</span> <span class="nav-text">0x1.base64 ����/����</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x2-base64��д"><span class="nav-number">2.</span> <span class="nav-text">0x2.base64��д</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-MISC����steganography�ĸ���"><span class="nav-number">3.</span> <span class="nav-text">0x3.MISC����steganography�ĸ���</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x4-������д����-amp-��ȡ����-Pһ��-��"><span class="nav-number">4.</span> <span class="nav-text">0x4.������д����&amp;��ȡ����(Ƥһ��^_^��</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x5-�ο�����"><span class="nav-number">5.</span> <span class="nav-text">0x5.�ο�����</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END…"><span class="nav-number"></span> <span class="nav-text">END…</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x1-base64-编码-解码"><span class="nav-number">1.</span> <span class="nav-text">0x1.base64 编码/解码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x2-base64隐写"><span class="nav-number">2.</span> <span class="nav-text">0x2.base64隐写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-MISC部分steganography的复现"><span class="nav-number">3.</span> <span class="nav-text">0x3.MISC部分steganography的复现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x4-常用隐写分析-amp-提取工具-皮一下-）"><span class="nav-number">4.</span> <span class="nav-text">0x4.常用隐写分析&amp;提取工具(皮一下^_^）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x5-参考链接"><span class="nav-number">5.</span> <span class="nav-text">0x5.参考链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END…"><span class="nav-number"></span> <span class="nav-text">END…</span></a></div>
             
 
           </div>
