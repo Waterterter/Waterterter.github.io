@@ -88,7 +88,7 @@
 <meta property="og:description" content="周六hxb和上海赛时间上冲突了，好在hxb只是选择题，但是！！选择题喵大只得了91分(满分150)，估计要凉了，听天由命吧…这次web前两个题都能在网上找到参考，下面是解题和复现的过程。Let’s start it。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog2_1.png">
-<meta property="og:updated_time" content="2019-11-03T14:12:47.347Z">
+<meta property="og:updated_time" content="2019-11-03T14:21:47.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog2_1.png">
 
@@ -334,13 +334,13 @@
 10.file()相当于读文件的操作与file_get_contents()类似，但是这个函数返回的是数组;   
 11.implode()将数组练成字符串;   
 12.最后echo出来。 
-运行几次就出flag了。这道题绕过方法不唯一，最后参考文献中也提到了不同的payload。 
+运行几次就出flag了。这道题绕过方法不唯一，最后参考文献中也提到了不同的payload。   
 ![flag](https://w4t3r.oss-cn-beijing.aliyuncs.com/blog2_2.png)
 
 <h3 id="0x2-baby5t"><a href="#0x2-baby5t" class="headerlink" title="0x2.baby5t"></a>0x2.baby5t</h3><p>刚看了一下题目关闭了… 第一遍做没有截图…想复现的话自己折腾环境不太容易，就简单叙述一下思路吧<br>首先题目直接给出了一段代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$x = $_GET[&apos;x&apos;];</span><br><span class="line">$pos = strpos($x,&quot;php&quot;);</span><br><span class="line">if($pos)&#123;</span><br><span class="line">        exit(&quot;denied&quot;);</span><br><span class="line">&#125;</span><br><span class="line">$ch = curl_init();</span><br><span class="line">curl_setopt($ch,CURLOPT_URL,&quot;$x&quot;);</span><br><span class="line">curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);</span><br><span class="line">$result = curl_exec($ch);</span><br><span class="line">echo $result;</span><br></pre></td></tr></table></figure>
 <p>这类题目比较明显的属于ssrf的利用了，主要原理是通过服务器端的curl来实现外网访问内网中其他服务器上的资源。<br>这段代码第一个考察的点是strpos的绕过。开发者写这段代码的意图是如果get的x中包含php就直接denied掉。我看很多师傅都是利用了php的一个双重url编码的bug来绕过的。也就是用%2570来绕过的。当时我做题时使用大小写也没有被denied掉，应该也可以？？？？<br>以下为主要解题步骤：<br>通过file://读取etc/hosts可以读到内网地址，通过扫描得到其他能够访问的主机地址，同时得到存在文件包含的漏洞。对其他主机地址的端口进行扫一遍除了80号端口敞开，还有25号端口敞开，其对应的服务是SMTP，于是使用gopher协议来攻击smtp（好吧也是第一次听说长见识了…），从而达到污染mail日志的目的。然后获取webshell达到读flag的目的。这道题说起来容易，做起来还是有不少坑的，但是我感觉这道题就题目来说是一道好题，解题思路比较顺畅，考察点之间的衔接很合理。<br>还是太菜了啊继续努力…以赛代练是一个不错的选择！</p>
-<h3 id="0x5-参考链接"><a href="#0x5-参考链接" class="headerlink" title="0x5.参考链接"></a>0x5.参考链接</h3><p><a href="https://www.jianshu.com/p/804d95f6d6fb" target="_blank" rel="noopener">https://www.jianshu.com/p/804d95f6d6fb</a><br><a href="https://blog.csdn.net/qq_42181428/article/details/100659865" target="_blank" rel="noopener">https://blog.csdn.net/qq_42181428/article/details/100659865</a><br><a href="https://github.com/tarunkant/Gopherus" target="_blank" rel="noopener">https://github.com/tarunkant/Gopherus</a>  </p>
+<h3 id="0x3-参考链接"><a href="#0x3-参考链接" class="headerlink" title="0x3.参考链接"></a>0x3.参考链接</h3><p><a href="https://www.jianshu.com/p/804d95f6d6fb" target="_blank" rel="noopener">https://www.jianshu.com/p/804d95f6d6fb</a><br><a href="https://blog.csdn.net/qq_42181428/article/details/100659865" target="_blank" rel="noopener">https://blog.csdn.net/qq_42181428/article/details/100659865</a><br><a href="https://github.com/tarunkant/Gopherus" target="_blank" rel="noopener">https://github.com/tarunkant/Gopherus</a>  </p>
 <h2 id="END…"><a href="#END…" class="headerlink" title="END…"></a>END…</h2>
       
     </div>
@@ -507,7 +507,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x1-decade"><span class="nav-number">1.</span> <span class="nav-text">0x1.decade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x2-baby5t"><span class="nav-number">2.</span> <span class="nav-text">0x2.baby5t</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x5-参考链接"><span class="nav-number">3.</span> <span class="nav-text">0x5.参考链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END…"><span class="nav-number"></span> <span class="nav-text">END…</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x1-decade"><span class="nav-number">1.</span> <span class="nav-text">0x1.decade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x2-baby5t"><span class="nav-number">2.</span> <span class="nav-text">0x2.baby5t</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-参考链接"><span class="nav-number">3.</span> <span class="nav-text">0x3.参考链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END…"><span class="nav-number"></span> <span class="nav-text">END…</span></a></div>
             
 
           </div>
