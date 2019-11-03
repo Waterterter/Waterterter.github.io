@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="周六hxb和上海赛时间上冲突了，好在hxb只是选择题，但是！！选择题喵大只得了91分(满分150)，估计要凉了，听天由命吧…这次web前两个题都能在网上找到参考，下面是解题和复现的过程。Let’s start it。   0x1.decade拿到题目直接看到提示源码在\code下，而flag在index.php中，源码如下：可以发现，程序对get的code参数进行一系列过滤。如果能绕过两个if中的">
+<meta name="description" content="周六hxb和上海赛时间上冲突了，好在hxb只是选择题，但是！！选择题喵大只得了91分(满分150)，估计要凉了，听天由命吧…这次web前两个题都能在网上找到参考，下面是解题和复现的过程。Let’s start it。">
 <meta name="keywords" content="web&amp;android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Base64隐写原理和2019巅峰极客隐写题steganography的复现">
 <meta property="og:url" content="https:&#x2F;&#x2F;cuagain.xyz&#x2F;shanghai&#x2F;web&#x2F;index.html">
 <meta property="og:site_name" content="W4t3rs&#39; Blog">
-<meta property="og:description" content="周六hxb和上海赛时间上冲突了，好在hxb只是选择题，但是！！选择题喵大只得了91分(满分150)，估计要凉了，听天由命吧…这次web前两个题都能在网上找到参考，下面是解题和复现的过程。Let’s start it。   0x1.decade拿到题目直接看到提示源码在\code下，而flag在index.php中，源码如下：可以发现，程序对get的code参数进行一系列过滤。如果能绕过两个if中的">
+<meta property="og:description" content="周六hxb和上海赛时间上冲突了，好在hxb只是选择题，但是！！选择题喵大只得了91分(满分150)，估计要凉了，听天由命吧…这次web前两个题都能在网上找到参考，下面是解题和复现的过程。Let’s start it。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog2_1.png">
-<meta property="og:updated_time" content="2019-11-03T14:05:46.077Z">
+<meta property="og:updated_time" content="2019-11-03T14:08:39.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog2_1.png">
 
@@ -321,6 +321,7 @@
 
       
         <p>周六hxb和上海赛时间上冲突了，好在hxb只是选择题，但是！！选择题喵大只得了91分(满分150)，估计要凉了，听天由命吧…这次web前两个题都能在网上找到参考，下面是解题和复现的过程。Let’s start it。  </p>
+<a id="more"></a>
 <h3 id="0x1-decade"><a href="#0x1-decade" class="headerlink" title="0x1.decade"></a>0x1.decade</h3><p>拿到题目直接看到提示源码在\code下，而flag在index.php中，源码如下：<br><img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog2_1.png" alt="源码"><br>可以发现，程序对get的code参数进行一系列过滤。如果能绕过两个if中的正则那么就能够eval到我们的payload，从而读flag。思路比较直接，但是过程非常艰辛。首先第一个正则中’\((?R)?)&#39;代表循环匹配，这句话的作用就是限定code只能是func1(func2(func3(func4())))这种样子的，而且最里层括号还不能有参数，否则就会no way了。而第二个正则的作用是过滤了一系列的函数或函数中的关键词。还是那句话，思路很简单，就是不会绕过啊…直接上大佬的payload来分析：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo(implode(file(end(scandir(chr(ord(hebrevc(crypt(chdir(next(scandir(chr(ord(hebrevc(crypt(phpversion()))))))))))))))));</span><br></pre></td></tr></table></figure>
 <p>我特喵当时一看这么多括号都懵逼了。仔细一分析还是比较容易理解的，这种复合复合再复合的函数直接从最里层分析：<br>1.phpversion()不多说，就是搞一串字符串当参数；*注意：由于第一个正则的原因，不允许直接出现参数;<br>2.crypt(phpversion()) 加密，首位大概率’$’，小概率’.’;经过自己的实验来看，这个概率比较小，几次执行不容易出现’.’，但是发现最后一位比较容易出’.’如果能够翻转一下出现’.’的概率就变大了，我推测这是导致接下来的函数使用的原因;<br>3.hebrevc()很诡异的函数，跟什么希伯来字符有关？？其实主要功能就是把字符流从左往右变成从右往左，使用它的目的上边介绍过了;<br>4.ord()取ascii值;<br>5.chr()得到’.’;<br>6.scandir(‘.’)本地运行后发现 array的第二个值为：  </p>
