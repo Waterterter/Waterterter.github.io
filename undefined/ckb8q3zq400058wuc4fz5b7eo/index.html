@@ -79,15 +79,19 @@
 
 
 
-<meta name="description" content="FL4G orz">
+<meta name="description" content="思前想后，还是准备找一份开发的工作，具体的话是Java后端开发。安全岗我们以后有缘再见！开始复习基础~ 0x1.Java特点1、跨平台特性，也被称作平台无关性，简单来说就是兼容各个操作系统。Sun公司的设计宗旨为“write once， run any where”，支撑这个特性的技术是Java虚拟机技术，简称JVM。这东西貌似是大厂必考察内容。">
 <meta name="keywords" content="web&amp;android">
-<meta property="og:type" content="website">
-<meta property="og:title" content="W4t3rs&#39; Blog">
-<meta property="og:url" content="https:&#x2F;&#x2F;cuagain.xyz&#x2F;index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础（1）">
+<meta property="og:url" content="https:&#x2F;&#x2F;cuagain.xyz&#x2F;undefined&#x2F;ckb8q3zq400058wuc4fz5b7eo&#x2F;index.html">
 <meta property="og:site_name" content="W4t3rs&#39; Blog">
-<meta property="og:description" content="FL4G orz">
+<meta property="og:description" content="思前想后，还是准备找一份开发的工作，具体的话是Java后端开发。安全岗我们以后有缘再见！开始复习基础~ 0x1.Java特点1、跨平台特性，也被称作平台无关性，简单来说就是兼容各个操作系统。Sun公司的设计宗旨为“write once， run any where”，支撑这个特性的技术是Java虚拟机技术，简称JVM。这东西貌似是大厂必考察内容。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog3_1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog3_2.png">
+<meta property="og:updated_time" content="2020-06-10T04:55:08.361Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;w4t3r.oss-cn-beijing.aliyuncs.com&#x2F;blog3_1.png">
 
 
 
@@ -117,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://cuagain.xyz/"/>
+  <link rel="canonical" href="https://cuagain.xyz/undefined/ckb8q3zq400058wuc4fz5b7eo/"/>
 
 
 
 
 
-  <title>W4t3rs' Blog</title>
+  <title>Java基础（1） | W4t3rs' Blog</title>
   
 
 
@@ -142,8 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,9 +239,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -268,9 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/undefined/ckb8q3zq400058wuc4fz5b7eo/" itemprop="url">Java基础（1）</a></h1>
+          <h1 class="post-title" itemprop="name headline">Java基础（1）</h1>
         
 
         <div class="post-meta">
@@ -320,17 +321,50 @@
       
 
       
-        
-          <p>思前想后，还是准备找一份开发的工作，具体的话是Java后端开发。安全岗我们以后有缘再见！开始复习基础~</p>
-<h3 id="0x1-Java特点"><a href="#0x1-Java特点" class="headerlink" title="0x1.Java特点"></a>0x1.Java特点</h3><p>1、跨平台特性，也被称作平台无关性，简单来说就是兼容各个操作系统。Sun公司的设计宗旨为“write once， run any where”，支撑这个特性的技术是Java虚拟机技术，简称JVM。这东西貌似是大厂必考察内容。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/undefined/ckb8q3zq400058wuc4fz5b7eo/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>思前想后，还是准备找一份开发的工作，具体的话是Java后端开发。安全岗我们以后有缘再见！开始复习基础~</p>
+<h3 id="0x1-Java特点"><a href="#0x1-Java特点" class="headerlink" title="0x1.Java特点"></a>0x1.Java特点</h3><p>1、跨平台特性，也被称作平台无关性，简单来说就是兼容各个操作系统。Sun公司的设计宗旨为“write once， run any where”，支撑这个特性的技术是Java虚拟机技术，简称JVM。这东西貌似是大厂必考察内容。  <a id="more"></a> </p>
+<ul>
+<li>1、JVM是一套支持Java语言运行的软件系统，定义了指令集、寄存器集、类文件结构栈、垃圾收集栈、内存区域等，提供了跨平台能力的基础框架，jvm运行在os上。</li>
+<li>2、Java虚拟机执行Java程序的过程如下图 , Java源程序 .java文件经编译生成.class文件即字节码文件，也称类文件，由jvm解释执行，解释一句执行一句。.class文件这东西是字节码，主要是被虚拟机处理的。</li>
+</ul>
+<p><img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog3_1.png" alt="执行过程"></p>
+<ul>
+<li>3、JVM执行程序的三个特点：   <ol>
+<li>动态性。管理功能全部采用的是动态方式。比如说动态分配数组内存、动态链接db、动态new一个对象。</li>
+<li>异常处理。可靠的处理机制。</li>
+<li>多线程。   </li>
+</ol>
+</li>
+</ul>
+<p>2、完全面向对象和简单性，Java面向对象是改进c++由来的，语法区别有：   </p>
+<ul>
+<li>不支持全局变量和宏替换，使用最终变量代替宏替换。避免全局变量和宏替换的副作用（不理解）</li>
+<li>数据类型固定长度，与平台无关</li>
+<li>类型转换时会检查</li>
+<li>不能goto</li>
+<li>不支持pointer，使用引用</li>
+<li>不支持struct，用class</li>
+<li>不支持header，用import导包</li>
+<li>内存动态存储且自动管理，动态申请数组和对象的存储空间，自动释放空间   </li>
+</ul>
+<p>对oop的改进有</p>
+<ul>
+<li>为八种基本数据类型提供包装类，使数据类型和类相关联，体现了完全面向对象</li>
+<li>将数组设计为引用类型，每个数组由长度属性</li>
+<li>不支持面向过程设计，无全局函数，成员方法内不支持static声明局部变量</li>
+<li>不支持友元类和运算符重载</li>
+<li>单继承。</li>
+</ul>
+<p>简单性的体现，无指针用下标，用引用。构造方法采用重载来区别，而不用默认参数。 </p>
+<p>3、可靠性。Java在语言和运行提供程序运行稳定性和可靠性保证。</p>
+<ul>
+<li>语言。规则检查严密，在编译和运行时严格检查，提供异常处理机制，即使在运行时出错也不要怕。</li>
+<li>运行架构。提供资源回收机制，对内存资源进行自动管理，跟踪程序使用的所有内存资源。这一切都是Java自己做的。  </li>
+</ul>
+<p>4、安全性。采用域管理方式，对访问策略配置。<br>5、多线程。支持多线程。<br>6、支持分布式网络应用</p>
+<h3 id="0x2-Java-API的常用包"><a href="#0x2-Java-API的常用包" class="headerlink" title="0x2.Java API的常用包"></a>0x2.Java API的常用包</h3><p><img src="https://w4t3r.oss-cn-beijing.aliyuncs.com/blog3_2.png" alt="api常用包"></p>
+<h3 id="0x3-Java语言基础"><a href="#0x3-Java语言基础" class="headerlink" title="0x3.Java语言基础"></a>0x3.Java语言基础</h3><p>1、命名规则：关键字、变量、对象、方法、包等名字通常全部字母小写；由多个单词构成的标识符，采用驼峰规则 如 toString；类名首字母大写class Hello；常量名全部大写public static final CODE.<br>2、注释：单行注释 // 多行注释/x x/  文档注释/** * /<br>3、</p>
+
       
     </div>
     
@@ -347,136 +381,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cuagain.xyz/shanghai/web/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="水水水...">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ava.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="W4t3rs' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/shanghai/web/" itemprop="url">2019上海大学生网络安全大赛两道web的复现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T22:29:28+08:00">
-                2019-11-03
-              </time>
+              <a href="/shanghai/web/" rel="next" title="2019上海大学生网络安全大赛两道web的复现">
+                <i class="fa fa-chevron-left"></i> 2019上海大学生网络安全大赛两道web的复现
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>周六hxb和上海赛时间上冲突了，好在hxb只是选择题，但是！！选择题喵大只得了91分(满分150)，估计要凉了，听天由命吧…这次web前两个题都能在网上找到参考，下面是解题和复现的过程。Let’s start it。  </p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/shanghai/web/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -486,258 +412,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cuagain.xyz/geek/stego/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="水水水...">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ava.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="W4t3rs' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/geek/stego/" itemprop="url">Base64隐写原理和2019巅峰极客隐写题steganography的复现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-23T15:52:22+08:00">
-                2019-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>第一篇博客，先来立个FLAG（orz）：以后能够坚持写下去！19号打了2019巅峰极客的比赛，然而还是非常菜，web部分对于我这样的萌新不太友好导致果断开始研究起了misc。下面是一道隐写题目中遇到的问题和解决过程。Lets start it。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/geek/stego/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cuagain.xyz/undefined/ckb8q2kqk00048wuc47rzg4oe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="水水水...">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ava.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="W4t3rs' Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/undefined/ckb8q2kqk00048wuc47rzg4oe/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-17T16:36:56+08:00">
-                2019-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>This site is still under development…</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/undefined/ckb8q2kqk00048wuc47rzg4oe/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -745,6 +424,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -765,8 +448,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -828,6 +520,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x1-Java特点"><span class="nav-number">1.</span> <span class="nav-text">0x1.Java特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x2-Java-API的常用包"><span class="nav-number">2.</span> <span class="nav-text">0x2.Java API的常用包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-Java语言基础"><span class="nav-number">3.</span> <span class="nav-text">0x3.Java语言基础</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -971,6 +679,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
